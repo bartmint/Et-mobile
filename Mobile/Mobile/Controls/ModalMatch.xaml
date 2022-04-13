@@ -1,0 +1,100 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<popup:PopupPage xmlns="http://xamarin.com/schemas/2014/forms"
+                 xmlns:popup="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
+                 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                 x:Class="Mobile.Controls.ModalMatch"
+                 xmlns:converters="clr-namespace:Mobile.Helpers.Converters"
+                 xmlns:viewModels="clr-namespace:Mobile.ViewModels">
+    <popup:PopupPage.BindingContext>
+        <viewModels:ModalMatchVM />
+    </popup:PopupPage.BindingContext>
+    <popup:PopupPage.Resources>
+        <converters:IsNullConverter x:Key="isNull" />
+        <converters:IsNotNullConverter x:Key="isNotNull" />
+    </popup:PopupPage.Resources>
+    <Frame BackgroundColor="White"
+           HorizontalOptions="Center"
+           HeightRequest="350"
+           Margin="20"
+           VerticalOptions="CenterAndExpand">
+        <StackLayout >
+            <StackLayout IsVisible="{Binding Match.PrevMatch, Converter={StaticResource isNull}}" VerticalOptions="CenterAndExpand">
+                <Label Text="Poprzedni mecz" />
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="Data: " />
+                    <Label Text="{Binding Match.PrevMatch.Date}" />
+                    <Label Text="o godzinie: " />
+                    <Label Text="{Binding Match.PrevMatch.Time}" />
+                </StackLayout>
+                <Label Text="Gospodarz"
+                       Margin="0,5,0,0" />
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Row="0"
+                           Grid.Column="0"
+                           HorizontalTextAlignment="Center"
+                           Text="{Binding Match.AwayTeamName}" />
+                    <Label Grid.Row="0"
+                           Grid.Column="1"
+                           HorizontalTextAlignment="Center"
+                           Text="{Binding Match.HomeTeamName}" />
+                    <Label Grid.Row="1"
+                           Grid.Column="0"
+                           HorizontalTextAlignment="Center"
+                           Text="{Binding Match.PrevMatch.AwayTeamGoals}" />
+                    <Label Grid.Row="1"
+                           Grid.Column="1"
+                           HorizontalTextAlignment="Center"
+                           Text="{Binding Match.PrevMatch.HomeTeamGoals}" />
+                </Grid>
+            </StackLayout>
+            <Label IsVisible="{Binding Match.PrevMatch, Converter={StaticResource isNotNull}}"
+                   Text="Brak danych o meczu z poprzedniej rundy" />
+            <StackLayout IsVisible="{Binding IsAdmin}"
+                         Margin="0,24">
+                <Label Text="Aktualny mecz:" />
+                <StackLayout Orientation="Horizontal"
+                             VerticalOptions="Center"
+                             HorizontalOptions="Start">
+                    <Label Text="{Binding Match.HomeTeamName}"
+                           VerticalOptions="Center"
+                           HorizontalOptions="Start" />
+                    <Entry Placeholder="Bramki"
+                           Text="{Binding UpdatedMatch.HomeTeamGoals, Mode=TwoWay}"
+                           FontSize="14"
+                           HorizontalTextAlignment="Center"
+                           HorizontalOptions="Center" />
+                </StackLayout>
+                <StackLayout Orientation="Horizontal"
+                             VerticalOptions="Center"
+                             HorizontalOptions="Start">
+                    <Label Text="{Binding Match.AwayTeamName}"
+                           HorizontalOptions="Start"
+                           VerticalOptions="Center" />
+                    <Entry Placeholder="Bramki"
+                           Text="{Binding UpdatedMatch.AwayTeamGoals, Mode=TwoWay}"
+                           FontSize="14"
+                           HorizontalTextAlignment="Center"
+                           HorizontalOptions="Center" />
+                </StackLayout>
+                <Button Text="Aktualizuj"
+                        BorderWidth="2"
+                        WidthRequest="50"
+                        FontAttributes="Bold"
+                        Padding="0"
+                        BorderColor="Gold"
+                        Command="{Binding UpdateMatchCommand}"
+                        CommandParameter="{Binding Match.Id}"
+                        BackgroundColor="{StaticResource Wh}" />
+            </StackLayout>
+
+        </StackLayout>
+    </Frame>
+</popup:PopupPage>

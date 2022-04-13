@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<popup:PopupPage xmlns="http://xamarin.com/schemas/2014/forms"
+                 xmlns:popup="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
+                 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                 x:Class="Mobile.Controls.ModalIndicator">
+    <Frame BackgroundColor="Transparent"
+           HorizontalOptions="Center"
+           Margin="20"
+           VerticalOptions="CenterAndExpand">
+            <ActivityIndicator Scale="0.5"
+                               Color="White"
+                               HorizontalOptions="Center"
+                               IsVisible="True"
+                               IsRunning="True" />
+    </Frame>
+</popup:PopupPage>

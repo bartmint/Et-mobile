@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Shell
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:views="clr-namespace:Mobile.Views"
+    Title="Mobile"
+    x:Class="Mobile.AppShell">
+    <Shell.Resources>
+        <ResourceDictionary>
+            <Style
+                TargetType="TabBar">
+                <Setter
+                    Property="Shell.TabBarTitleColor"
+                    Value="Black" />
+                <Setter
+                    Property="Shell.TabBarUnselectedColor"
+                        Value="#acadad"  />
+                <Setter Property="Shell.BackgroundColor"
+                        Value="{StaticResource Wh}" />
+                
+                <Setter Property="Shell.TitleColor" 
+                        Value="{StaticResource Wh}"
+                        />
+                <Setter Property="Shell.BackgroundColor"
+                        Value="{StaticResource DarkBl}" />
+                <Setter Property="Shell.TabBarBackgroundColor"
+                        Value="{StaticResource Wh}" />
+            </Style>
+        </ResourceDictionary>
+    </Shell.Resources>
+    <TabBar>
+        <Tab
+            Title="Wyniki"
+            Shell.NavBarIsVisible="False"
+            Icon="ic_ball">
+            <ShellContent
+                Route="Results"
+                ContentTemplate="{DataTemplate views:ResultsPage}" />
+        </Tab>
+        <Tab
+            Title="Dziś"
+            Shell.NavBarIsVisible="False"
+            Icon="ic_field">
+            <ShellContent
+                Route="TodayMatches"
+                ContentTemplate="{DataTemplate views:DailyMatchesPage}" />
+        </Tab>
+        <Tab
+            Title="Ligi"
+            Shell.NavBarIsVisible="False"
+            Icon="ic_rank">
+            <ShellContent
+                Route="Leagues"
+                ContentTemplate="{DataTemplate views:LeaguesPage}" />
+        </Tab>
+        <Tab
+            Title="Tabela"
+            Shell.NavBarIsVisible="False"
+            Icon="ic_award">
+            <ShellContent
+                Route="Table"
+                ContentTemplate="{DataTemplate views:StatsPage}" />
+        </Tab>
+        <Tab
+            Title="Więcej"
+            Icon="ic_more">
+            <ShellContent
+                Route="More"
+                ContentTemplate="{DataTemplate views:OptionsPage}" />
+        </Tab>
+    </TabBar>
+</Shell>

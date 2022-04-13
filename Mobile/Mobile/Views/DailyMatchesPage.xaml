@@ -1,0 +1,116 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Mobile.Views.DailyMatchesPage"
+             xmlns:controls="clr-namespace:Mobile.Controls"
+             xmlns:converters="clr-namespace:Mobile.Helpers.Converters"
+             xmlns:viewModels="clr-namespace:Mobile.ViewModels"
+             BackgroundColor="{StaticResource LightBl}"
+             >
+    <ContentPage.BindingContext>
+        <viewModels:DailyMatchesVM />
+    </ContentPage.BindingContext>
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:IsNullConverter x:Key="isNull" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+        <StackLayout>
+        <StackLayout
+                     VerticalOptions="End">
+            <Grid BackgroundColor="{StaticResource DarkBl}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="7*" />
+                    <ColumnDefinition Width="3*" />
+                </Grid.ColumnDefinitions>
+                <Label Margin="14,16,0,16"
+                       Grid.Row="0"
+                       Grid.Column="0"
+                       HorizontalTextAlignment="Start"
+                       VerticalTextAlignment="Center"
+                       Text="{Binding Info}"
+                       TextColor="{StaticResource Wh}"
+                       FontSize="14" />
+                <controls:CustomLeaguePicker HorizontalOptions="End"
+                                             HorizontalTextAlignment="Start"
+                                             VerticalTextAlignment="End"
+                                             Grid.Row="0"
+                                             Grid.Column="1"
+                                             x:Name="LeaguePicker"
+                                             TextColor="Transparent"
+                                             ItemsSource="{Binding Leagues}"
+                                             SelectedItem="{Binding CurrentLeague, Mode=OneWay}"
+                                             SelectedIndexChanged="LeaguePicker_SelectedIndexChanged"
+                                             Icon="ic_more">
+                </controls:CustomLeaguePicker>
+            </Grid>
+       
+        </StackLayout>
+        <CollectionView x:Name="col"
+                        IsEnabled="false"
+                        ItemsSource="{Binding Matches}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Grid ColumnSpacing="0" RowSpacing="0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition />
+                            <RowDefinition Height="60" />
+                            <RowDefinition Height="1"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition Width="10" />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                            <Label HorizontalOptions="FillAndExpand"
+                                   Margin="5,10,5,0"
+                                   Grid.Row="0"
+                                   Grid.Column="2"
+                                   Text="{Binding Time}"
+                                   HorizontalTextAlignment="End"
+                                   TextColor="{StaticResource Dr}"
+                                   FontSize="14">
+                            </Label>
+                        <Label Grid.Row="1"
+                               Grid.Column="0"
+                               HorizontalTextAlignment="Center"
+                               VerticalTextAlignment="Center"
+                               HorizontalOptions="FillAndExpand"
+                               Text="{Binding HomeTeamName}"
+                               TextColor="{StaticResource Dr}"
+                               FontSize="14" />
+                        <Label Grid.Row="1"
+                               Grid.Column="1"
+                               HorizontalTextAlignment="Center"
+                               VerticalTextAlignment="Center"
+                               HorizontalOptions="FillAndExpand"
+                               Text=":"
+                               TextColor="{StaticResource Dr}"
+                               FontSize="14" />
+                        <Label Grid.Row="1"
+                               Grid.Column="2"
+                               HorizontalTextAlignment="Center"
+                               VerticalTextAlignment="Center"
+                               HorizontalOptions="FillAndExpand"
+                               Text="{Binding AwayTeamName}"
+                               TextColor="{StaticResource Dr}"
+                               FontSize="14" />
+                        <Label Grid.Row="2"
+                               Grid.Column="0"
+                               BackgroundColor="{StaticResource Wh}" />
+                        <Label Grid.Row="2"
+                               Grid.Column="1"
+                               BackgroundColor="{StaticResource Wh}" />
+                        <Label Grid.Row="2"
+                               Grid.Column="2"
+                               BackgroundColor="{StaticResource Wh}" />
+
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </StackLayout>
+</ContentPage>

@@ -1,0 +1,81 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Mobile.Views.SignUpPage"
+             Title="Zarejestruj się"
+             xmlns:controls="clr-namespace:Mobile.Controls"
+             xmlns:viewModels="clr-namespace:Mobile.ViewModels"
+             BackgroundColor="{StaticResource LightBl}">
+    <ContentPage.BindingContext>
+        <viewModels:SignUpVM />
+    </ContentPage.BindingContext>
+    <ContentPage.Content>
+        <AbsoluteLayout>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="400" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition  Width="400" />
+                </Grid.ColumnDefinitions>
+                <StackLayout BackgroundColor="{StaticResource DarkBl}"
+                             Grid.Column="0"
+                             Grid.Row="0">
+                    <Image Source="fireball"
+                           HeightRequest="130"
+                           Margin="0,24,0,0" />
+                </StackLayout>
+            </Grid>
+            <Frame VerticalOptions="Center"
+                   Margin="0,80,0,0"
+                   HorizontalOptions="Center"
+                   AbsoluteLayout.LayoutBounds="0,0,1,1"
+                   AbsoluteLayout.LayoutFlags="All"
+                   CornerRadius="5">
+                <StackLayout WidthRequest="300"
+                             HeightRequest="300">
+                    <StackLayout>
+                        <controls:ImageEntry Text="{Binding User.Email, Mode=TwoWay}"
+                                             TextColor="{StaticResource Dr}"
+                                             FontSize="14"
+                                             Placeholder="Email"
+                                             HorizontalOptions="FillAndExpand"
+                                             Image="user"
+                                             ImageWidth="10"
+                                             ImageHeight="10" />
+                        <controls:ImageEntry Text="{Binding User.Password, Mode=TwoWay}"
+                                             TextColor="{StaticResource Dr}"
+                                             IsPassword="True"
+                                             FontSize="14"
+                                             Placeholder="Hasło"
+                                             HorizontalOptions="FillAndExpand"
+                                             Image="key"
+                                             ImageWidth="10"
+                                             ImageHeight="10" />
+                        <controls:ImageEntry Text="{Binding User.PasswordConfirmation, Mode=TwoWay}"
+                                             TextColor="{StaticResource Dr}"
+                                             FontSize="14"
+                                             IsPassword="True"
+                                             Placeholder="Potwierdź hasło"
+                                             HorizontalOptions="FillAndExpand"
+                                             Image="key"
+                                             ImageWidth="10"
+                                             ImageHeight="10" />
+                    </StackLayout>
+                    <StackLayout>
+
+                    </StackLayout >
+                    <Button Text="Zarejestruj się"
+                            Margin="0,16,0,0"
+                            Command="{Binding RegisterUser}"
+                            BackgroundColor="{StaticResource DarkBl}"
+                            TextColor="{StaticResource Wh}" />
+                    <Button Text="Masz juz konto? Kliknij żeby się zalogować"
+                            Clicked="Button_Clicked"
+                            BackgroundColor="Transparent"
+                           TextColor="{StaticResource DarkBl}" />
+                </StackLayout>
+            </Frame>
+        </AbsoluteLayout>
+    </ContentPage.Content>
+</ContentPage>

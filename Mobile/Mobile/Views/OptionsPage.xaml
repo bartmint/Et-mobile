@@ -1,0 +1,82 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Mobile.Views.OptionsPage"
+             Title="Ustawienia"
+             xmlns:viewModels="clr-namespace:Mobile.ViewModels"
+             xmlns:converters="clr-namespace:Mobile.Helpers.Converters"
+             BackgroundColor="{StaticResource LightBl}">
+    <ContentPage.BindingContext>
+        <viewModels:OptionsVM />
+    </ContentPage.BindingContext>
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Color x:Key="Primary">#484559</Color>
+            <Style TargetType="NavigationPage">
+                <Setter Property="BarBackgroundColor"
+                        Value="Green" />
+                <Setter Property="BarTextColor"
+                        Value="{StaticResource DarkBl}" />
+            </Style>
+            <converters:BoolToOpposite x:Key="boolToOp" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <StackLayout VerticalOptions="Center">
+            <StackLayout>
+                <Image Source="playerOrange" />
+            </StackLayout>
+            <StackLayout>
+                <StackLayout Margin="16,16,16,0"
+                             VerticalOptions="Start"
+                             Orientation="Horizontal"
+                             HorizontalOptions="Center">
+                    <Button Text="Konto"
+                            IsVisible="{Binding TokenExists}"
+                            WidthRequest="120"
+                            VerticalOptions="Center"
+                            HorizontalOptions="Center"
+                            BackgroundColor="{StaticResource DarkBl}"
+                            TextColor="{StaticResource Wh}"
+                            Clicked="NavigateToAccount" />
+                    <Button Text="Panel Admina"
+                            IsVisible="{Binding IsAdmin}"
+                            WidthRequest="120"
+                            VerticalOptions="Center"
+                            HorizontalOptions="Center"
+                            BackgroundColor="{StaticResource DarkBl}"
+                            TextColor="{StaticResource Wh}"
+                            Clicked="NavigateToAdminPanel" />
+                    <Button Text="Wyloguj"
+                            IsVisible="{Binding TokenExists}"
+                            WidthRequest="120"
+                            VerticalOptions="Center"
+                            HorizontalOptions="Center"
+                            BackgroundColor="{StaticResource DarkBl}"
+                            TextColor="{StaticResource Wh}"
+                            Clicked="Logout" />
+                </StackLayout>
+                <StackLayout Margin="16,0,16,16"
+                             VerticalOptions="Start"
+                             Orientation="Horizontal"
+                             IsVisible="{Binding TokenExists, Converter={StaticResource boolToOp}}"
+                             HorizontalOptions="Center">
+                    <Button Text="Logowanie"
+                            WidthRequest="120"
+                            VerticalOptions="Center"
+                            HorizontalOptions="Center"
+                            BackgroundColor="{StaticResource DarkBl}"
+                            TextColor="{StaticResource Wh}"
+                            Clicked="NavigateToSignInPage" />
+                    <Button Text="Rejestracja"
+                            WidthRequest="120"
+                            VerticalOptions="Center"
+                            HorizontalOptions="Center"
+                            BackgroundColor="{StaticResource DarkBl}"
+                            TextColor="{StaticResource Wh}"
+                            Clicked="NavigateToSignUpPage" />
+                </StackLayout>
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

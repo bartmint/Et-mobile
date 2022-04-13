@@ -1,0 +1,126 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewModels="clr-namespace:Mobile.ViewModels"
+             xmlns:converters="clr-namespace:Mobile.Helpers.Converters"
+             Title="Panel admina"
+             BackgroundColor="{StaticResource LightBl}"
+             x:Class="Mobile.Views.AdminPanelPage">
+    <ContentPage.BindingContext>
+        <viewModels:AdminPanelVM />
+    </ContentPage.BindingContext>
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:SwitchTextConverter x:Key="switchText" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <StackLayout Margin="16,24,16,0">
+            <StackLayout>
+                <Label Text="Dodaj nową ligę"
+                       TextColor="Black"
+                       FontSize="16" />
+                <Entry Text="{Binding LeagueToAdd, Mode=TwoWay}" />
+                <StackLayout Orientation="Horizontal"
+                             HorizontalOptions="End">
+                    <Button Text="Dodaj"
+                            BorderWidth="2"
+                            FontAttributes="Bold"
+                            HorizontalOptions="End"
+                            Padding="0"
+                            BorderColor="{StaticResource DarkBl}"
+                            BackgroundColor="{StaticResource Wh}"
+                            TextColor="{StaticResource DarkBl}"
+                            Command="{Binding AddLeague}" />
+                    <Button Text="Wyczyść"
+                            BorderWidth="2"
+                            FontAttributes="Bold"
+                            HorizontalOptions="End"
+                            Padding="0"
+                            BorderColor="Red"
+                            BackgroundColor="{StaticResource Wh}"
+                            TextColor="Red"
+                            Command="{Binding ClearLeague}" />
+                </StackLayout>
+            </StackLayout>
+            <StackLayout Orientation="Horizontal"
+                         Margin="0,32,0,0"
+                         HorizontalOptions="Center">
+                <Button Text="{Binding Display, Converter={StaticResource switchText}}"
+                        BorderWidth="2"
+                        FontAttributes="Bold"
+                        WidthRequest="177"
+                        Padding="0"
+                        BorderColor="{StaticResource DarkBl}"
+                        BackgroundColor="{StaticResource Wh}"
+                        TextColor="{StaticResource DarkBl}"
+                        Command="{Binding DisplayLeagues}" />
+                <Button Text="Aktualizuj wszystko"
+                        BorderWidth="2"
+                        WidthRequest="177"
+                        FontAttributes="Bold"
+                        Padding="0"
+                        BorderColor="Gold"
+                        BackgroundColor="{StaticResource Wh}"
+                        Command="{Binding UpdateAllLeagues}" />
+            </StackLayout>
+            <CollectionView x:Name="col"
+                            IsVisible="{Binding Display}"
+                            Margin="0,24,16,0"
+                            ItemsSource="{Binding Leagues}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid ColumnSpacing="2"
+                              RowSpacing="2">
+                            <Grid.RowDefinitions>
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="5*" />
+                                <ColumnDefinition Width="3*" />
+                                <ColumnDefinition Width="2*" />
+                            </Grid.ColumnDefinitions>
+                            <Label Grid.Row="0"
+                                   Grid.Column="0"
+                                   Margin="4"
+                                   HorizontalTextAlignment="Start"
+                                   VerticalTextAlignment="Center"
+                                   HorizontalOptions="FillAndExpand"
+                                   Text="{Binding Title}"
+                                   TextColor="{StaticResource Dr}"
+                                   FontSize="14" />
+                            <Button Grid.Row="0"
+                                    Padding="0"
+                                    Margin="4"
+                                    BackgroundColor="{StaticResource Wh}"
+                                    BorderColor="Gold"
+                                    BorderWidth="2"
+                                    Grid.Column="1"
+                                    Text="Aktualizuj"
+                                    CommandParameter="{Binding Id}"
+                                    Clicked="UpdateLeague" />
+                            <Button Grid.Row="0"
+                                    Margin="4"
+                                    Padding="0"
+                                    BackgroundColor="{StaticResource Wh}"
+                                    BorderColor="Red"
+                                    BorderWidth="2"
+                                    Grid.Column="2"
+                                    CommandParameter="{Binding Id}"
+                                    Clicked="DeleteLeague"
+                                    Text="Usuń" />
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+            <Label Text="{Binding NotificationMessage}"
+                   IsVisible="{Binding IsNotificationVisible}"
+                   Margin="0,0,0,8"
+                   Padding="32,16"
+                   BackgroundColor="{Binding NotificationColor}"
+                   TextColor="white"
+                   HorizontalOptions="End"
+                   VerticalOptions="EndAndExpand" />
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Application xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Mobile.App">
+    <Application.Resources>
+        <ResourceDictionary>
+            <!-- Styles -->
+            <Style TargetType="NavigationPage">
+                <Setter Property="BarBackgroundColor"
+                        Value="Red" />
+                <Setter Property="BarTextColor"
+                        Value="White" />
+            </Style>
+            <!-- Styles -->
+
+       
+        <Color x:Key="NavCol">#06A27D</Color>
+        <Color x:Key="MainCol">#3895d3</Color>
+        <Color x:Key="NavSelCol">#104236</Color>
+        <Color x:Key="White">White</Color>
+        <Color x:Key="Bl">#3895d3</Color>
+        <Color x:Key="DarkBl">#276791</Color>
+        <Color x:Key="LightBl">#e0ecff</Color>
+        <Color x:Key="Dr">#202020</Color>
+        <Color x:Key="Wh">#ffffff</Color>
+        <Color x:Key="Gr">#dee0df</Color>
+        <Color x:Key="LightGr">#dfdfdf</Color>
+        <Color
+            x:Key="BtnQue">#013843</Color>
+        <Color
+            x:Key="BtnCol">#005161</Color>
+        <!--...-->
+        
+        <!--Fonts-->
+        <Style TargetType="Label">
+            <Setter Property="FontFamily" Value="Lato"/>
+        </Style>
+        <!--...-->
+        <!--Fonts-->
+        <Style TargetType="Button">
+            <Setter Property="FontFamily"
+                    Value="Lato" />
+        </Style>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

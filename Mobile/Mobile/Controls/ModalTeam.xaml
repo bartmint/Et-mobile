@@ -1,0 +1,91 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<popup:PopupPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:popup="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
+             x:Class="Mobile.Controls.ModalTeam"
+             xmlns:converters="clr-namespace:Mobile.Helpers.Converters"
+             xmlns:viewModels="clr-namespace:Mobile.ViewModels">
+    <popup:PopupPage.BindingContext>
+        <viewModels:ModalTeamVM />
+    </popup:PopupPage.BindingContext>
+    <popup:PopupPage.Resources>
+        <converters:TextConverter x:Key="TextCoverter" />
+    </popup:PopupPage.Resources>
+    <Frame BackgroundColor="White"
+           HorizontalOptions="Center"
+           Margin="20"
+           VerticalOptions="CenterAndExpand">
+        <StackLayout>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="35"/>
+                    <RowDefinition Height="35"/>
+                    <RowDefinition Height="35"/>
+                    <RowDefinition Height="35"/>
+                    <RowDefinition Height="35"/>
+                    <RowDefinition Height="35"/>
+                    <RowDefinition Height="35"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Label Grid.Row="0" 
+                       Grid.Column="0" 
+                       VerticalTextAlignment="Center"
+                       Text="{Binding Team.Name}" />
+                <Image Grid.Row="0"
+                       Grid.Column="1"
+                       Source="{Binding Team.Photo}" />
+                <Label Grid.Row="1"
+                       Grid.Column="0"
+                       VerticalTextAlignment="Center"
+                       Text="Barwy: " />
+                <Label Grid.Row="1"
+                       Grid.Column="1"
+                       VerticalTextAlignment="Center"
+                       Text="{Binding Team.Colors}" />
+                <Label Grid.Row="2"
+                       Grid.Column="0"
+                       VerticalTextAlignment="Center"
+                       Text="Rok założenia: " />
+                <Label Grid.Row="2"
+                       Grid.Column="1"
+                       VerticalTextAlignment="Center"
+                       Text="{Binding Team.YearOfFundation}" />
+                <Label Grid.Row="3"
+                       Grid.Column="0"
+                       VerticalTextAlignment="Center"
+                       Text="Adres: " />
+                <Label Grid.Row="3"
+                       Grid.Column="1"
+                       VerticalTextAlignment="Center"
+                       Text="{Binding Team.Address}" />
+                <Label Grid.Row="4"
+                       Grid.Column="0"
+                       VerticalTextAlignment="Center"
+                       Text="Telefon: " />
+                <Label Grid.Row="4"
+                       Grid.Column="1"
+                       VerticalTextAlignment="Center"
+                       Text="{Binding Team.Phone}" />
+                <Label Grid.Row="5"
+                       Grid.Column="0"
+                       VerticalTextAlignment="Center"
+                       Text="Email: " />
+                <Label Grid.Row="5"
+                       Grid.Column="1"
+                       VerticalTextAlignment="Center"
+                       Text="{Binding Team.Email}" />
+                <Label Grid.Row="6"
+                       Grid.Column="0"
+                       VerticalTextAlignment="Center"
+                       Text="Strona www: " />
+                <Label Grid.Row="6"
+                       Grid.Column="1"
+                       VerticalTextAlignment="Center"
+                       Text="{Binding Team.PageWWW}" />
+            </Grid>
+        </StackLayout>
+    </Frame>
+</popup:PopupPage>

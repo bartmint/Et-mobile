@@ -1,0 +1,74 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Mobile.Views.AccountPage"
+             Title="Ustawienia konta"
+             xmlns:viewModels="clr-namespace:Mobile.ViewModels"
+             xmlns:converters="clr-namespace:Mobile.Helpers.Converters"
+             xmlns:controls="clr-namespace:Mobile.Controls"
+             BackgroundColor="{StaticResource LightBl}">
+    <ContentPage.BindingContext>
+        <viewModels:AccountVM />
+    </ContentPage.BindingContext>
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:RoleConverter x:Key="convertRoleToText" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <StackLayout StyleClass="test"
+                     Margin="16">
+            <StackLayout>
+                <Label Text="Email: "
+                       TextColor="{StaticResource DarkBl}"
+                       Margin="0,8,0,0" />
+                <Label Text="{Binding UserInfo.Email}"
+                       TextColor="{StaticResource DarkBl}"
+                       Margin="24,4,0,8" />
+            </StackLayout>
+            <StackLayout>
+                <Label Text="Rola: "
+                       TextColor="{StaticResource DarkBl}"
+                       Margin="0,4,0,0" />
+                <Label Margin="24,4,0,8"
+                       Text="{Binding UserInfo.IsAdmin, Converter={StaticResource convertRoleToText}}"
+                       TextColor="{StaticResource DarkBl}" />
+            </StackLayout>
+            <StackLayout>
+                <Label Text="Ustawiona liga: "
+                       TextColor="{StaticResource DarkBl}"
+                       Margin="0,4,0,0" />
+                <StackLayout Margin="24,4,0,8" VerticalOptions="CenterAndExpand"  HorizontalOptions="FillAndExpand"
+                             Orientation="Horizontal">
+                    <Label Text="{Binding UserInfo.FavLeagueName}"
+                           TextColor="{StaticResource DarkBl}" />
+                    <controls:CustomLeaguePicker HorizontalOptions="Start"
+                                                 HorizontalTextAlignment="Start"
+                                                 VerticalTextAlignment="Start"
+                                                 x:Name="LeaguePicker" 
+                                                 TextColor="Transparent"
+                                                 HeightRequest="10"
+                                                 ItemsSource="{Binding Leagues}"
+                                                 SelectedItem="{Binding CurrentLeague, Mode=OneWay}"
+                                                 SelectedIndexChanged="LeaguePicker_SelectedIndexChanged"
+                                                 Icon="settings">
+                    </controls:CustomLeaguePicker>
+                </StackLayout>
+            </StackLayout>
+            <StackLayout IsVisible="{Binding ShowUpdateButton}" Margin="0,16,0,0">
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="Zmiana na:" TextColor="{StaticResource DarkBl}"/>
+                    <Label Text="{Binding ChangedLeague}"
+                           TextColor="{StaticResource DarkBl}" />
+                </StackLayout>
+                <Button Text="Aktualizuj preference"
+                        Margin="0,8"
+                        BorderColor="{StaticResource Wh}"
+                        BackgroundColor="{StaticResource DarkBl}"
+                        Command="{Binding UpdatePreferences}"
+                        CommandParameter="{Binding ChangedLeague}"
+                        TextColor="{StaticResource Wh}" />
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

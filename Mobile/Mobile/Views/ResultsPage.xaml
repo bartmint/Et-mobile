@@ -1,0 +1,220 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Mobile.Views.ResultsPage"
+             xmlns:controls="clr-namespace:Mobile.Controls"
+             xmlns:converters="clr-namespace:Mobile.Helpers.Converters"
+             xmlns:viewModels="clr-namespace:Mobile.ViewModels"
+             BackgroundColor="{StaticResource LightBl}"
+             >
+    <ContentPage.BindingContext>
+        <viewModels:ResultsQueueVM />
+    </ContentPage.BindingContext>
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:IsNullConverter x:Key="isNull" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <StackLayout>
+        <StackLayout 
+                     VerticalOptions="End">
+            <Grid BackgroundColor="{StaticResource DarkBl}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="7*"/>
+                    <ColumnDefinition Width="3*"/>
+                </Grid.ColumnDefinitions>
+                <Label Margin="14,16,0,16"
+                       Grid.Row="0"
+                       Grid.Column="0"
+                       HorizontalTextAlignment="Start"
+                       Text="{Binding QueueInfo}"
+                       TextColor="{StaticResource Wh}"
+                       FontSize="14" />
+                <controls:CustomLeaguePicker HorizontalOptions="End"
+                                             HorizontalTextAlignment="Start"
+                                             VerticalTextAlignment="End"
+                                             Grid.Row="0"
+                                             Grid.Column="1"
+                                             x:Name="LeaguePicker"
+                                             TextColor="Transparent"
+                                             ItemsSource="{Binding Leagues}"
+                                             SelectedItem="{Binding CurrentLeague, Mode=OneWay}"
+                                             SelectedIndexChanged="LeaguePicker_SelectedIndexChanged"
+                                             Icon="ic_more">
+                </controls:CustomLeaguePicker>
+            </Grid>
+            
+            <CollectionView
+                            x:Name="col"
+                            IsEnabled="false"
+                            ItemsSource="{Binding Matches}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate >
+                        <Grid>
+                            <Grid.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type viewModels:BaseViewModel}}, Path=RowClicked}"
+                                                      CommandParameter="{Binding Id}">
+                                </TapGestureRecognizer>
+                            </Grid.GestureRecognizers>
+                            <Grid.RowDefinitions>
+                                <RowDefinition />
+                                <RowDefinition Height="60"/>
+                                <RowDefinition Height="1"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                                <StackLayout Orientation="Horizontal"
+                                         Margin="5,10,5,0"
+                                         Grid.Row="0"
+                                         Grid.Column="0"
+                                         >
+                                <Label Text="{Binding Date}"
+                                       Margin="8,0,0,0"
+                                       HorizontalTextAlignment="Start"
+                                       HorizontalOptions="FillAndExpand"
+                                       TextColor="{StaticResource Dr}"
+                                       FontSize="14">
+                                </Label>
+                                <Label HorizontalOptions="FillAndExpand"
+                                       Text="{Binding Time}"
+                                       Margin="0,0,8,0"
+                                       HorizontalTextAlignment="End"
+                                       TextColor="{StaticResource Dr}"
+                                       FontSize="14">
+                                </Label>
+                            </StackLayout>
+                            <Grid Grid.Row="1"
+                                  Grid.Column="0"
+                                  Margin="8,0,8,0"
+                                  >
+                                <Grid.RowDefinitions>
+                                    <RowDefinition />
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition />
+                                    <ColumnDefinition />
+                                    <ColumnDefinition />
+                                </Grid.ColumnDefinitions>
+                                <Label Grid.Row="0"
+                                       Grid.Column="0"
+                                       HorizontalTextAlignment="End"
+                                       HorizontalOptions="FillAndExpand"
+                                       VerticalTextAlignment="Center"
+                                       Text="{Binding HomeTeamName}"
+                                       TextColor="{StaticResource Dr}"
+                                       FontSize="14"/>
+                                    <Grid Grid.Row="0" 
+                                      Grid.Column="1" 
+                                          x:Name="middleGrid">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition/>
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+                                   
+                                    <Label Grid.Row="0"
+                                           Grid.Column="0"
+                                           HorizontalTextAlignment="End"
+                                           VerticalTextAlignment="Center"
+                                           HorizontalOptions="FillAndExpand"
+                                           VerticalOptions="FillAndExpand"
+                                           Text="{Binding HomeTeamGoals}"
+                                           TextColor="{StaticResource Dr}"
+                                           FontSize="16" />
+                                    <Label Grid.Row="0"
+                                           Grid.Column="1"
+                                           HorizontalTextAlignment="Center"
+                                           VerticalTextAlignment="Center"
+                                           VerticalOptions="FillAndExpand"
+                                           HorizontalOptions="FillAndExpand"
+                                           Text="-"
+                                           TextColor="{StaticResource Dr}"
+                                           FontSize="16" />
+                                    <Label Grid.Row="0"
+                                           Grid.Column="2"
+                                           HorizontalTextAlignment="Start"
+                                           VerticalTextAlignment="Center"
+                                           VerticalOptions="FillAndExpand"
+                                           HorizontalOptions="FillAndExpand"
+                                           Text="{Binding AwayTeamGoals}"
+                                           TextColor="{StaticResource Dr}"
+                                           FontSize="16" />
+                                </Grid>
+                                <Label Grid.Row="0"
+                                       Grid.Column="2"
+                                       HorizontalTextAlignment="Start"
+                                       VerticalTextAlignment="Center"
+                                       HorizontalOptions="FillAndExpand"
+                                       Text="{Binding AwayTeamName}"
+                                       TextColor="{StaticResource Dr}"
+                                       FontSize="14" />
+                            </Grid>
+                            <Label Grid.Row="2" Grid.Column="0" BackgroundColor="{StaticResource Wh}"/>
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </StackLayout>
+        <StackLayout Orientation="Vertical">
+            <Grid x:Name="MainGrid"
+                  HorizontalOptions="Center">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition Width="auto" />
+                </Grid.ColumnDefinitions>
+                <Button Command="{Binding ButtonClickedCommand}"
+                        CommandParameter="previous"
+                        Text="Poprzednia"
+                        FontSize="14"
+                        TextColor="{StaticResource Wh}"
+                        BackgroundColor="{StaticResource DarkBl}"
+                        x:Name="btn1"
+                        VerticalOptions="CenterAndExpand"
+                        WidthRequest="100"
+                        HeightRequest="60"
+                        Grid.Row="0"
+                        Grid.Column="0" />
+                <Button Command="{Binding ButtonClickedCommand}"
+                        CommandParameter="actual"
+                        Text="Obecna"
+                        FontSize="14"
+                        x:Name="btn2"
+                        TextColor="{StaticResource Wh}"
+                        BackgroundColor="{StaticResource DarkBl}"
+                        VerticalOptions="CenterAndExpand"
+                        WidthRequest="100"
+                        HeightRequest="60"
+                        Grid.Row="0"
+                        Grid.Column="1" />
+                <StackLayout Grid.Row="0"
+                             Grid.Column="2"
+                             BackgroundColor="{StaticResource DarkBl}"
+                             Orientation="Horizontal"
+                             >
+                    <Button Command="{Binding ButtonClickedCommand}"
+                            CommandParameter="next"
+                            Text="Następna"
+                            FontSize="14"
+                            BorderRadius="8"
+                            x:Name="btn3"
+                            TextColor="{StaticResource Wh}"
+                            VerticalOptions="CenterAndExpand"
+                            BackgroundColor="Transparent"
+                            />
+                </StackLayout>
+            </Grid>
+        </StackLayout>
+    </StackLayout>
+</ContentPage>

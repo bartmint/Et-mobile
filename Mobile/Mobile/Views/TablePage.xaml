@@ -1,0 +1,132 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Mobile.Views.StatsPage"
+             Title="Statystyki"
+             BackgroundColor="{StaticResource LightBl}"
+             xmlns:controls="clr-namespace:Mobile.Controls"
+             xmlns:viewModels="clr-namespace:Mobile.ViewModels">
+    <ContentPage.BindingContext>
+        <viewModels:TeamStatsTableVM />
+    </ContentPage.BindingContext>
+    <ContentPage.Content>
+        <StackLayout>
+            <StackLayout VerticalOptions="End">
+                <Grid BackgroundColor="{StaticResource DarkBl}">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="7*" />
+                        <ColumnDefinition Width="3*" />
+                    </Grid.ColumnDefinitions>
+                    <Label Margin="14,24,0,24"
+                           Grid.Row="0"
+                           Grid.Column="0"
+                           HorizontalTextAlignment="Start"
+                           VerticalTextAlignment="Center"
+                           Text="{Binding Info}"
+                           TextColor="{StaticResource Wh}"
+                           FontSize="14" />
+                    <controls:CustomLeaguePicker HorizontalOptions="End"
+                                                 HorizontalTextAlignment="Start"
+                                                 VerticalTextAlignment="End"
+                                                 Grid.Row="0"
+                                                 Grid.Column="1"
+                                                 x:Name="LeaguePicker"
+                                                 TextColor="Transparent"
+                                                 ItemsSource="{Binding Leagues}"
+                                                 SelectedItem="{Binding CurrentLeague, Mode=OneWay}"
+                                                 SelectedIndexChanged="LeaguePicker_SelectedIndexChanged"
+                                                 Icon="ic_more">
+                    </controls:CustomLeaguePicker>
+                </Grid>
+            </StackLayout>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="120"/>
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="50"/>
+                    <ColumnDefinition Width="50"/>
+                    <ColumnDefinition Width="30"/>
+                </Grid.ColumnDefinitions>
+                <Label Grid.Row="0"
+                       Grid.Column="0"
+                       Text="Pozycja klubu"
+                       HorizontalTextAlignment="Center"
+                       VerticalTextAlignment="Center"
+                       TextColor="{StaticResource Dr}" />
+                <Label Grid.Row="0"
+                       Grid.Column="2"
+                       Text="M"
+                       HorizontalTextAlignment="Center"
+                       VerticalTextAlignment="Center"
+                       TextColor="{StaticResource Dr}"  />
+                <Label Grid.Row="0"
+                       Grid.Column="3"
+                       Text="P"
+                       HorizontalTextAlignment="Center"
+                       VerticalTextAlignment="Center"
+                       TextColor="{StaticResource Dr}"  />
+            </Grid>
+            <CollectionView ItemsSource="{Binding TeamsStats}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Grid>
+                            <Grid.RowDefinitions>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="80"/>
+                            <ColumnDefinition />
+                            <ColumnDefinition Width="50" />
+                            <ColumnDefinition Width="50" />
+                            <ColumnDefinition Width="30"/>
+                        </Grid.ColumnDefinitions>
+                            <Label Grid.Row="0"
+                                   Grid.Column="0"
+                                   Text="{Binding RankingPosition}"
+                                   TextColor="{StaticResource Dr}"
+                                   HorizontalTextAlignment="Center"
+                                   VerticalTextAlignment="Center"
+                                   Padding="5,15,0,15">
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type viewModels:BaseViewModel}}, Path=RowClicked}"
+                                                          CommandParameter="{Binding TeamName}">
+                                    </TapGestureRecognizer>
+                                </Label.GestureRecognizers>
+                            </Label>
+                            <Label Grid.Row="0"
+                                   Grid.Column="1"
+                                   Text="{Binding TeamName}"
+                                   TextColor="{StaticResource Dr}"
+                                   HorizontalTextAlignment="Start"
+                                   VerticalTextAlignment="Center">
+                                <Label.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type viewModels:BaseViewModel}}, Path=RowClicked}"
+                                                          CommandParameter="{Binding TeamName}">
+                                    </TapGestureRecognizer>
+                                </Label.GestureRecognizers>
+                            </Label>
+                        <Label Grid.Row="0"
+                               Grid.Column="2"
+                               Text="{Binding MatchesQuantity}"
+                                   TextColor="{StaticResource Dr}"
+                                   HorizontalTextAlignment="Center"
+                               VerticalTextAlignment="Center" />
+                        <Label Grid.Row="0"
+                               Grid.Column="3"
+                               Text="{Binding Points}"
+                                   TextColor="{StaticResource Dr}"
+                                   HorizontalTextAlignment="Center"
+                               VerticalTextAlignment="Center" />
+                        </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
